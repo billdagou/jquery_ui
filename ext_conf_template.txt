@@ -1,0 +1,5 @@
+# cat=jQuery UI; type=user[&Dagou\JqueryUi\ExtensionManagerConfiguration->renderCDNSelector]; label=jQuery UI CDN Source
+cdn =
+
+# cat=jQuery UI; type=user[&Dagou\JqueryUi\ExtensionManagerConfiguration->renderThemeSelector]; label=jQuery UI Theme
+theme =
