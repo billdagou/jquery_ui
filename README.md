@@ -8,9 +8,32 @@ You can easily choose using CDN or local jQuery UI library.
 ## How to use it
 This extension depends on [EXT:jquery](https://github.com/billdagou/jquery), please make sure you have [EXT:jquery](https://github.com/billdagou/jquery) installed in your TYPO3, or at least existed.
 
-All you need is to load the library file.
+You can load the library file in your PHP code.
 
 	\Dagou\JqueryUi\Utility\JqueryUiUtility::loadJqueryUi();
+
+Or, use the ViewHelper in your Fluid template.
+
+	<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+		xmlns:jqui="http://typo3.org/ns/Dagou/JqueryUi/ViewHelpers">
+		<jqui:load />
+	</html>
+
+#### LoadViewHelper
+The ViewHelper you need to load jQuery UI library in your Fluid template.
+
+	<jqui:load />
+
+Allowed attributes:
+
+- `js` (string)
+Customized jQuery UI library.
+
+- `css` (string)
+Customized jQuery UI theme.
+
+- `footer` (boolean)
+Add the library to footer or not. Default: `TRUE`.
 
 ## How to maintain the CDN resources
 To replace or add new CDN resources, please update $GLOBALS\['TYPO3\_CONF\_VARS'\]\['EXTCONF'\]\['jquery_ui'\]\['CDN'\] in your own extension.

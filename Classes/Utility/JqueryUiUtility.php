@@ -9,23 +9,26 @@ class JqueryUiUtility {
 	/**
 	 * @param string $js
 	 * @param string $css
+	 * @param bool $footer
 	 */
-	static public function loadJqueryUi($js = NULL, $css = NULL) {
+	static public function loadJqueryUi($js = NULL, $css = NULL, $footer = TRUE) {
 		JqueryUtility::loadJquery();
 
 		/** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer */
 		$pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
 
 		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jquery_ui']);
-		$siteRelPath = ExtensionManagementUtility::siteRelPath('jquery');
+		$siteRelPath = ExtensionManagementUtility::siteRelPath('jquery_ui');
+
+		$func = $footer ? 'addJsFooterLibrary' : 'addJsLibrary';
 
 		if ($js) {
-			$pageRenderer->addJsLibrary('jquery-ui', $js);
+			$pageRenderer->$func('jquery-ui', $js);
 		} else {
 			if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'][$extConf['cdn']]['js']) {
-				$pageRenderer->addJsLibrary('jquery-ui', $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'][$extConf['cdn']]['js']);
+				$pageRenderer->$func('jquery-ui', $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'][$extConf['cdn']]['js']);
 			} else {
-				$pageRenderer->addJsLibrary('jquery-ui', $siteRelPath.'Resources/Public/JQueryUI/jquery-ui.min.js');
+				$pageRenderer->$func('jquery-ui', $siteRelPath.'Resources/Public/JQueryUI/jquery-ui.min.js');
 			}
 		}
 
