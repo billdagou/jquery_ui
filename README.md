@@ -6,7 +6,7 @@ You can easily choose using CDN or local jQuery UI library.
 **The extension version only matches jQuery UI library version, doesn't mean anything else.**
 
 ## How to use it
-This extension depends on [EXT:jquery](https://github.com/billdagou/jquery), please make sure you have [EXT:jquery](https://github.com/billdagou/jquery) installed in your TYPO3, or at least existed.
+This extension depends on [EXT:jquery](https://github.com/billdagou/jquery), please make sure you have [EXT:jquery](https://github.com/billdagou/jquery) installed in your TYPO3.
 
 You can load the library file in your PHP code.
 
@@ -50,4 +50,4 @@ Sometimes, you don't want to load all the components, or maybe use your own them
 
 	\Dagou\JqueryUi\Utility\JqueryUiUtility::loadJqueryUi('Js_Library', 'Css_Theme');
 
-**Both file paths are relative to PATH_SITE.**
+**Both file paths are relative to PATH_site.**

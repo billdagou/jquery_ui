@@ -5,11 +5,11 @@ $EM_CONF[$_EXTKEY] = [
 	'category' => 'misc',
 	'constraints' => [
 		'depends' => [
-			'jquery' => '1.6.0-0.0.0',
+			'jquery' => '1.7.0-0.0.0',
 		],
 	],
 	'state' => 'stable',
 	'author' => 'Bill.Dagou',
 	'author_email' => 'billdagou@gmail.com',
-	'version' => '1.11.4',
+	'version' => '1.12.1',
 ];
