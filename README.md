@@ -15,7 +15,8 @@ You can load the library file in your PHP code.
 Or, use the ViewHelper in your Fluid template.
 
 	<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-		xmlns:jqui="http://typo3.org/ns/Dagou/JqueryUi/ViewHelpers">
+		xmlns:jqui="http://typo3.org/ns/Dagou/JqueryUi/ViewHelpers"
+		data-namespace-typo3-fluid="true">
 		<jqui:load />
 	</html>
 
