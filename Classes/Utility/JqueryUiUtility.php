@@ -35,7 +35,7 @@ class JqueryUiUtility {
 		} elseif ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'][$extConf['cdn']]['js']) {
 			$pageRenderer->$func('jquery-ui', $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'][$extConf['cdn']]['js']);
 		} else {
-			$pageRenderer->$func('jquery-ui', $siteRelPath.'Resources/Public/JQueryUI/jquery-ui.min.js');
+			$pageRenderer->$func('jquery-ui', $siteRelPath.'Resources/Public/jquery-ui.min.js');
 		}
 	}
 }
