@@ -1,31 +1,41 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['CDN'] = [
-	'None' => [
-		'js' => '',
-		'css' => '',
-	],
-	'MaxCDN' => [
-		'js' => '//code.jquery.com/ui/1.12.1/jquery-ui.min.js',
-		'css' => '//code.jquery.com/ui/1.12.1/themes/###THEME###/jquery-ui.min.css',
-	],
-	'Google' => [
-		'js' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
-		'css' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/###THEME###/jquery-ui.min.css',
-	],
-	'Microsoft' => [
-		'js' => '//ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js',
-		'css' => '//ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/###THEME###/jquery-ui.min.css',
-	],
-	'CDNJS' => [
-		'js' => '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
-		'css' => '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/###THEME###/jquery-ui.min.css',
-	],
-	'jsDelivr' => [
-		'js' => '//cdn.jsdelivr.net/jquery.ui/1.12.1/jquery-ui.min.js',
-		'css' => '//cdn.jsdelivr.net/jquery.ui/1.12.1/themes/###THEME###/jquery-ui.min.css',
-	],
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY] = [
+    'CDN' => [
+        'jQuery' => \Dagou\JqueryUi\Cdn\jQuery::class,
+        'Google' => \Dagou\JqueryUi\Cdn\Google::class,
+        'Microsoft' => \Dagou\JqueryUi\Cdn\Microsoft::class,
+        'CDNJS' => \Dagou\JqueryUi\Cdn\CDNJS::class,
+        'jsDelivr' => \Dagou\JqueryUi\Cdn\jsDelivr::class,
+    ],
+    'Theme' => [
+        'Base' => 'base',
+        'Black Tie' => 'black-tie',
+        'Blitzer' => 'blitzer',
+        'Cupertino' => 'cupertino',
+        'Dark Hive' => 'dark-hive',
+        'Dot Luv' => 'dot-luv',
+        'Eggplant' => 'eggplant',
+        'Excite Bike' => 'excite-bike',
+        'Flick' => 'flick',
+        'Hot Sneaks' => 'hot-sneaks',
+        'Humanity' => 'humanity',
+        'Le Frog' => 'le-frog',
+        'Mint Choc' => 'mint-choc',
+        'Overcast' => 'overcast',
+        'Pepper Grinder' => 'pepper-grinder',
+        'Redmond' => 'redmond',
+        'Smoothness' => 'smoothness',
+        'South Street' => 'south-street',
+        'Start' => 'start',
+        'Sunny' => 'sunny',
+        'Swanky Purse' => 'swanky-purse',
+        'Trontastic' => 'trontastic',
+        'UI darkness' => 'ui-darkness',
+        'UI lightness' => 'ui-lightness',
+        'Vader' => 'vader',
+    ],
 ];
