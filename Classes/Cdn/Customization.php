@@ -21,7 +21,7 @@ class Customization extends AbstractCdn {
      */
     public function loadTheme(string $theme = NULL) {
         if ($theme !== NULL) {
-            parent::loadTheme($theme - $this->getAssetPath($theme));
+            parent::loadTheme($this->getAssetPath($theme));
         }
     }
 }
