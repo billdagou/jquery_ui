@@ -1,27 +1,24 @@
 # TYPO3 Extension: jQuery UI
-EXT:jquery_ui allows you to use [jQuery UI](http://jqueryui.com/) in your extensions.
 
-You can easily choose using CDN or local jQuery UI library.
+EXT:jquery_ui allows you to use [jQuery UI](https://jqueryui.com/) in your extensions.
 
-**The extension version only matches jQuery UI library version, doesn't mean anything else.**
+**The extension version only matches the jQuery UI library version, it doesn't mean anything else.**
 
 ## How to use it
-You can load the libraries in your Fluid template with **LoadViewHelper** and **LoadThemeViewHelper**.
+You can load the libraries in your Fluid template easily.
 
-	<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-		xmlns:jqui="http://typo3.org/ns/Dagou/JqueryUi/ViewHelpers"
-		data-namespace-typo3-fluid="true">
-		<jqui:load />
-		<jqui:loadTheme />
-	</html>
+    <jqui:loadCss />
+    <jqui:loadJs />
 
 You can also load your own libraries.
 
-    <jqui:load js="..." />
-	<jqui:loadTheme theme="..." />
+    <jqui:loadCss css="..." />
+    <jqui:loadJs js="..." />
     
-Or, load the JS before the &lt;BODY&gt; tag.
+Or, load the javascript library on top.
 
     <jqui:loadJs footer="false" />
     
-To add new CDN source, please refer to `\Dagou\JqueryUi\Cdn\jQuery` and update `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN']` accordingly.
+To use the CDN resource, please set `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN']` in `ext_localconf.php` or `AdditionalConfiguration.php`.
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'] = \Dagou\JqueryUi\CDN\StackPath::class;

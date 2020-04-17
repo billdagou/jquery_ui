@@ -1,16 +1,11 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+defined('TYPO3_MODE') || die();
+
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['jqui'] = [
+    'Dagou\\JqueryUi\\ViewHelpers',
+];
 
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY] = [
-    'CDN' => [
-        'jQuery' => \Dagou\JqueryUi\Cdn\jQuery::class,
-        'Google' => \Dagou\JqueryUi\Cdn\Google::class,
-        'Microsoft' => \Dagou\JqueryUi\Cdn\Microsoft::class,
-        'CDNJS' => \Dagou\JqueryUi\Cdn\CDNJS::class,
-        'jsDelivr' => \Dagou\JqueryUi\Cdn\jsDelivr::class,
-    ],
     'Theme' => [
         'Base' => 'base',
         'Black Tie' => 'black-tie',
