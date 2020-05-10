@@ -19,6 +19,11 @@ Or, load the javascript library on top.
 
     <jqui:loadJs footer="false" />
     
+To enable the I18n, you can specify the locale code or detect it from your site language by code.
+
+    <jqui:loadJs enableLocale="true" locale="zh-CN" />
+    <jqui:loadJs enableLocale="true" />
+    
 To use the CDN resource, please set `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN']` in `ext_localconf.php` or `AdditionalConfiguration.php`.
 
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'] = \Dagou\JqueryUi\CDN\StackPath::class;
