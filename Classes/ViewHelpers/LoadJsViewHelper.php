@@ -36,10 +36,12 @@ class LoadJsViewHelper extends AbstractLoadViewHelper {
             if ($locale) {
                 $js = $this->getAssetPath('EXT:jquery_ui/Resources/Public/i18n/datepicker-'.$locale.'.js');
 
-                if (file_exists(Environment::getPublicPath().$js) && $this->arguments['footer']) {
-                    $this->getPageRenderer()->addJsFooterLibrary('jquery-ui.locale', $js);
-                } else {
-                    $this->getPageRenderer()->addJsLibrary('jquery-ui.locale', $js);
+                if (file_exists(Environment::getPublicPath().$js)) {
+                    if ($this->arguments['footer']) {
+                        $this->getPageRenderer()->addJsFooterLibrary('jquery-ui.locale', $js);
+                    } else {
+                        $this->getPageRenderer()->addJsLibrary('jquery-ui.locale', $js);
+                    }
                 }
             }
         }
