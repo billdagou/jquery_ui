@@ -5,25 +5,28 @@ EXT:jquery_ui allows you to use [jQuery UI](https://jqueryui.com/) in your exten
 **The extension version only matches the jQuery UI library version, it doesn't mean anything else.**
 
 ## How to use it
-You can load the libraries in your Fluid template easily.
+You can load the libraries in your Fluid template easily.  You may need to load jQuery manually.
 
     <jqui:loadCss />
     <jqui:loadJs />
 
 You can also load your own libraries.
 
-    <jqui:loadCss css="..." />
-    <jqui:loadJs js="..." />
-    
-Or, load the javascript library on top.
+    <jqui:loadCss href="..." />
+    <jqui:loadJs src="..." />
 
-    <jqui:loadJs footer="false" />
+For more options please refer to &lt;f:asset.css&gt; and &lt;f:asset.script&gt;.
     
-To enable the I18n, you can specify the locale code or detect it from your site language by code.
+To enable the DatePicker localization, you can specify the locale code or detect it from your site language directly.
 
-    <jqui:loadJs enableLocale="true" locale="zh-CN" />
-    <jqui:loadJs enableLocale="true" />
-    
-To use the CDN resource, please set `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN']` in `ext_localconf.php` or `AdditionalConfiguration.php`.
+    <jqui:datepick.locale />
+    <jqui:datepick.locale locale="zh-CN" />
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['jquery_ui']['CDN'] = \Dagou\JqueryUi\CDN\StackPath::class;
+To use other jQuery UI source, you can register it in `ext_localconf.php` or `AdditionalConfiguration.php`.
+
+    \Dagou\JqueryUi\Utility\ExtensionUtility::registerSource(\Dagou\JqueryUi\Source\StackPath::class);
+
+You may want to disable the other source and use the local one instead in some cases, for example saving page as PDF by [WKHtmlToPdf](https://wkhtmltopdf.org/).
+
+    <jqui:loadCss disableSource="true" />
+    <jqui:loadJs disableSource="true" />

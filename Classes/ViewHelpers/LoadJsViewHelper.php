@@ -1,49 +1,45 @@
 <?php
 namespace Dagou\JqueryUi\ViewHelpers;
 
-use Dagou\JqueryUi\Traits\Asset;
-use Dagou\JqueryUi\Traits\PageRenderer;
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Core\Environment;
+use Dagou\JqueryUi\Interfaces\Source;
+use Dagou\JqueryUi\Source\Local;
+use Dagou\JqueryUi\Utility\ExtensionUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Asset\ScriptViewHelper;
 
-class LoadJsViewHelper extends AbstractLoadViewHelper {
-    use Asset, PageRenderer;
+class LoadJsViewHelper extends ScriptViewHelper {
+    public function initializeArguments(): void {
+        parent::initializeArguments();
 
-    public function initializeArguments() {
-        $this->registerArgument('footer', 'boolean', 'Add to footer or not.', FALSE, TRUE);
-        $this->registerArgument('js', 'string', 'jQuery UI .JS file path.');
+        $this->registerArgument('disableSource', 'boolean', 'Disable Source.', FALSE, FALSE);
         $this->registerArgument('enableLocale', 'boolean', 'Enable jQuery UI locale.');
         $this->registerArgument('locale', 'string', 'Locale code.');
+        $this->overrideArgument(
+            'identifier',
+            'string',
+            'Use this identifier within templates to only inject your JS once, even though it is added multiple times.',
+            FALSE,
+            'jquery_ui'
+        );
     }
 
-    public function render() {
-        $cdn = $this->getCDN((bool)$this->arguments['js']);
-
-        $cdn->loadJs($this->arguments['js'], $this->arguments['footer']);
-
-        if ($this->arguments['enableLocale']) {
-            if ($this->arguments['locale']) {
-                $locale = $this->arguments['locale'];
+    /**
+     * @return string
+     */
+    public function render(): string {
+        if (!$this->arguments['src']) {
+            if (!$this->arguments['disableSource']
+                && ($className = ExtensionUtility::getSource())
+                && is_subclass_of($className, Source::class)
+            ) {
+                $source = GeneralUtility::makeInstance($className);
             } else {
-                if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface) {
-                    /** @var \TYPO3\CMS\Core\Site\Entity\SiteLanguage $siteLanguage */
-                    if ($siteLanguage = $GLOBALS['TYPO3_REQUEST']->getAttribute('language')) {
-                        $locale = str_replace('_', '-', explode('.', $siteLanguage->getLocale())[0]);
-                    }
-                }
+                $source = GeneralUtility::makeInstance(Local::class);
             }
 
-            if ($locale) {
-                $js = $this->getAssetPath('EXT:jquery_ui/Resources/Public/i18n/datepicker-'.$locale.'.js');
-
-                if (file_exists(Environment::getPublicPath().$js)) {
-                    if ($this->arguments['footer']) {
-                        $this->getPageRenderer()->addJsFooterLibrary('jquery-ui.locale', $js);
-                    } else {
-                        $this->getPageRenderer()->addJsLibrary('jquery-ui.locale', $js);
-                    }
-                }
-            }
+            $this->tag->addAttribute('src', $source->getJs());
         }
+
+        return parent::render();
     }
 }
