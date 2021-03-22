@@ -7,13 +7,13 @@ EXT:jquery_ui allows you to use [jQuery UI](https://jqueryui.com/) in your exten
 ## How to use it
 You can load the libraries in your Fluid template easily.  You may need to load jQuery manually.
 
-    <jqui:loadCss />
-    <jqui:loadJs />
+    <jqui:css />
+    <jqui:js />
 
 You can also load your own libraries.
 
-    <jqui:loadCss href="..." />
-    <jqui:loadJs src="..." />
+    <jqui:css href="..." />
+    <jqui:js src="..." />
 
 For more options please refer to &lt;f:asset.css&gt; and &lt;f:asset.script&gt;.
     
@@ -28,5 +28,5 @@ To use other jQuery UI source, you can register it in `ext_localconf.php` or `Ad
 
 You may want to disable the other source and use the local one instead in some cases, for example saving page as PDF by [WKHtmlToPdf](https://wkhtmltopdf.org/).
 
-    <jqui:loadCss disableSource="true" />
-    <jqui:loadJs disableSource="true" />
+    <jqui:css disableSource="true" />
+    <jqui:js disableSource="true" />
