@@ -28,8 +28,8 @@ class Theme {
         sort($themes);
 
         return '<select id="em-'.$params['propertyName'].'" class="form-control" name="'.$params['fieldName'].'">'
-                .implode('', array_map(function(string $theme) {
-                    return '<option value="'.$theme.'">'
+                .implode('', array_map(function(string $theme) use ($params) {
+                    return '<option value="'.$theme.'"'.($theme === $params['fieldValue'] ? ' selected="selected"' : '').'>'
                             .$GLOBALS['LANG']->sL(
                                 $theme ? ucwords(str_replace('-', ' ', $theme)) : 'None'
                             )
