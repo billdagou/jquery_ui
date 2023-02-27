@@ -11,9 +11,8 @@ class JsViewHelper extends ScriptViewHelper {
     public function initializeArguments(): void {
         parent::initializeArguments();
 
-        $this->registerArgument('disableSource', 'boolean', 'Disable Source.', FALSE, FALSE);
-        $this->registerArgument('enableLocale', 'boolean', 'Enable jQuery UI locale.');
-        $this->registerArgument('locale', 'string', 'Locale code.');
+        $this->registerArgument('disableSource', 'boolean', 'Disable Source.');
+
         $this->overrideArgument(
             'identifier',
             'string',
@@ -28,9 +27,8 @@ class JsViewHelper extends ScriptViewHelper {
      */
     public function render(): string {
         if (!$this->arguments['src']) {
-            if (!$this->arguments['disableSource']
-                && ($className = ExtensionUtility::getSource())
-                && is_subclass_of($className, Source::class)
+            if ($this->arguments['disableSource'] !== TRUE
+                && is_subclass_of(($className = ExtensionUtility::getSource()), Source::class)
             ) {
                 $source = GeneralUtility::makeInstance($className);
             } else {

@@ -10,7 +10,9 @@ class CssViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Asset\CssViewHelper {
     public function initializeArguments(): void {
         parent::initializeArguments();
 
-        $this->registerArgument('disableSource', 'boolean', 'Disable Source.', FALSE, FALSE);
+        $this->registerArgument('theme', 'string', 'Theme name');
+        $this->registerArgument('disableSource', 'boolean', 'Disable Source.');
+
         $this->overrideArgument(
             'identifier',
             'string',
@@ -25,16 +27,17 @@ class CssViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Asset\CssViewHelper {
      */
     public function render(): string {
         if (!$this->arguments['href']) {
-            if (!$this->arguments['disableSource']
-                && ($className = ExtensionUtility::getSource())
-                && is_subclass_of($className, Source::class)
+            if ($this->arguments['disableSource'] !== TRUE
+                && is_subclass_of(($className = ExtensionUtility::getSource()), Source::class)
             ) {
                 $source = GeneralUtility::makeInstance($className);
             } else {
                 $source = GeneralUtility::makeInstance(Local::class);
             }
 
-            $this->tag->addAttribute('href', $source->getCss());
+            $theme = $this->arguments['theme'] ?: 'base';
+
+            $this->tag->addAttribute('href', $source->getCss($theme));
         }
 
         return parent::render();
